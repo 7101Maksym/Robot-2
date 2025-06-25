@@ -109,18 +109,27 @@ public class Rotatedrone : MonoBehaviour
 
         controlAngle = Vector2.Angle(transform.right.normalized, new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y).normalized);
 
-        if (controlAngle < 89)
+        if (controlAngle < 90)
         {
             return angleToMouse;
         }
-        else if (controlAngle > 91)
+        else if (controlAngle > 90)
         {
             return -angleToMouse;
         }
         else
         {
-            return 0;
+            if (mousePosition.y < dronePosition.y)
+            {
+                return -180;
+            }
+            else if (mousePosition.y > dronePosition.y)
+            {
+                return 0;
+            }
         }
+
+        return 0;
     }
 
     private void FixedUpdate()
