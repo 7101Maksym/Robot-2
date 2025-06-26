@@ -21,9 +21,16 @@ public class Rotatedrone : MonoBehaviour
     [SerializeField] private SpriteRenderer R315;
     [SerializeField] private SpriteRenderer R337;
 
+    private StateManager _stateManager;
+
     private int[] angles = { 0, 22, 45, 67, 90, 112, 135, 157, 180, 202, 225, 247, 270, 292, 315, 337, 360 };
 
     private int angle = 0, nowAngle;
+
+    private void Awake()
+    {
+        _stateManager = GetComponent<StateManager>();
+    }
 
     private void DontVisibleAll()
     {
@@ -132,67 +139,70 @@ public class Rotatedrone : MonoBehaviour
         return 0;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        DontVisibleAll();
-
-        nowAngle = GetNowAngle();
-
-        GetAngle(nowAngle);
-
-        switch (angle)
+        if (_stateManager.FlyingState == FlyingStates.Flying)
         {
-            case 0:
-                R000.enabled = true;
-                break;
-            case 22:
-                R022.enabled = true;
-                break;
-            case 45:
-                R045.enabled = true;
-                break;
-            case 67:
-                R067.enabled = true;
-                break;
-            case 90:
-                R090.enabled = true;
-                break;
-            case 112:
-                R112.enabled = true;
-                break;
-            case 135:
-                R135.enabled = true;
-                break;
-            case 157:
-                R157.enabled = true;
-                break;
-            case 180:
-                R180.enabled = true;
-                break;
-            case 202:
-                R202.enabled = true;
-                break;
-            case 225:
-                R225.enabled = true;
-                break;
-            case 247:
-                R247.enabled = true;
-                break;
-            case 270:
-                R270.enabled = true;
-                break;
-            case 292:
-                R292.enabled = true;
-                break;
-            case 315:
-                R315.enabled = true;
-                break;
-            case 337:
-                R337.enabled = true;
-                break;
-            case 360:
-                R000.enabled = true;
-                break;
+            DontVisibleAll();
+
+            nowAngle = GetNowAngle();
+
+            GetAngle(nowAngle);
+
+            switch (angle)
+            {
+                case 0:
+                    R000.enabled = true;
+                    break;
+                case 22:
+                    R022.enabled = true;
+                    break;
+                case 45:
+                    R045.enabled = true;
+                    break;
+                case 67:
+                    R067.enabled = true;
+                    break;
+                case 90:
+                    R090.enabled = true;
+                    break;
+                case 112:
+                    R112.enabled = true;
+                    break;
+                case 135:
+                    R135.enabled = true;
+                    break;
+                case 157:
+                    R157.enabled = true;
+                    break;
+                case 180:
+                    R180.enabled = true;
+                    break;
+                case 202:
+                    R202.enabled = true;
+                    break;
+                case 225:
+                    R225.enabled = true;
+                    break;
+                case 247:
+                    R247.enabled = true;
+                    break;
+                case 270:
+                    R270.enabled = true;
+                    break;
+                case 292:
+                    R292.enabled = true;
+                    break;
+                case 315:
+                    R315.enabled = true;
+                    break;
+                case 337:
+                    R337.enabled = true;
+                    break;
+                case 360:
+                    R000.enabled = true;
+                    break;
+            }
         }
     }
 }
