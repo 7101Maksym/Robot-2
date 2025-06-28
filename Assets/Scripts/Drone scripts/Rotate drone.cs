@@ -23,7 +23,7 @@ public class Rotatedrone : MonoBehaviour
 
     private StateManager _stateManager;
 
-    private int[] angles = { 0, 22, 45, 67, 90, 112, 135, 157, 180, 202, 225, 247, 270, 292, 315, 337, 360 };
+    private readonly int[] angles = { 0, 22, 45, 67, 90, 112, 135, 157, 180, 202, 225, 247, 270, 292, 315, 337, 360 };
 
     private int angle = 0, nowAngle;
 

@@ -3,8 +3,8 @@ using UnityEngine;
 public class DroneMove : MonoBehaviour
 {
     private StateManager _stateManager;
-    private RenderController[] _renderController;
     private Rigidbody2D _rb;
+    private RenderersHandler _renderersHandler;
 
     private Vector2 forvard, back, left, right;
     private Vector2 _direction;
@@ -14,7 +14,7 @@ public class DroneMove : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _stateManager = GetComponent<StateManager>();
-        _renderController = GetComponentsInChildren<RenderController>();
+        _renderersHandler = GetComponentInChildren<RenderersHandler>();
     }
 
     private void Update()
@@ -39,52 +39,36 @@ public class DroneMove : MonoBehaviour
         }
     }
 
-    private void SetDirectForAllRenderers(int direction)
-    {
-        foreach (var render in _renderController)
-        {
-            render.SetFlyDirection(direction);
-        }
-    }
-
-    private void SetTakeoffOrLandForAllRenderers(FlyingStates state)
-    {
-        foreach (var render in _renderController)
-        {
-            render.TakeoffOrLand(state);
-        }
-    }
-
     private void SetDirectionInProcess()
     {
         if (WS == 0 && AD == 0)
         {
             _direction = Vector2.zero;
-            SetDirectForAllRenderers(0);
+            _renderersHandler.SetDirectForAllRenderers(0);
             return;
         }
         else if (WS == 0 && AD == 1)
         {
             _direction = right;
-            SetDirectForAllRenderers(2);
+            _renderersHandler.SetDirectForAllRenderers(2);
             return;
         }
         else if (WS == 0 && AD == -1)
         {
             _direction = left;
-            SetDirectForAllRenderers(4);
+            _renderersHandler.SetDirectForAllRenderers(4);
             return;
         }
         else if (WS == 1 && AD == 0)
         {
             _direction = forvard;
-            SetDirectForAllRenderers(1);
+            _renderersHandler.SetDirectForAllRenderers(1);
             return;
         }
         else if (WS == -1 && AD == 0)
         {
             _direction = back;
-            SetDirectForAllRenderers(3);
+            _renderersHandler.SetDirectForAllRenderers(3);
             return;
         }
     }
@@ -101,11 +85,11 @@ public class DroneMove : MonoBehaviour
         {
             if (LandOrTakeoff == 1 && _stateManager.FlyingState == FlyingStates.Landed)
             {
-                SetTakeoffOrLandForAllRenderers(FlyingStates.Flying);
+                _renderersHandler.SetTakeoffOrLandForAllRenderers(FlyingStates.Flying);
             }
             else if (LandOrTakeoff == -1 && _stateManager.FlyingState == FlyingStates.Flying)
             {
-                SetTakeoffOrLandForAllRenderers(FlyingStates.Landed);
+                _renderersHandler.SetTakeoffOrLandForAllRenderers(FlyingStates.Landed);
             }
         }
     }

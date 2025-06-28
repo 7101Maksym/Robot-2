@@ -21,4 +21,9 @@ public class InputHandler : MonoBehaviour
         var takeoffOrLand = context.ReadValue<float>();
         _droneMove.TakeoffOrLand((int)takeoffOrLand);
     }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        
+    }
 }
