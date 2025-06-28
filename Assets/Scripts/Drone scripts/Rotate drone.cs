@@ -22,6 +22,7 @@ public class Rotatedrone : MonoBehaviour
     [SerializeField] private SpriteRenderer R337;
 
     private StateManager _stateManager;
+    private FireRenderersController _renderersController;
 
     private readonly int[] angles = { 0, 22, 45, 67, 90, 112, 135, 157, 180, 202, 225, 247, 270, 292, 315, 337, 360 };
 
@@ -30,6 +31,7 @@ public class Rotatedrone : MonoBehaviour
     private void Awake()
     {
         _stateManager = GetComponent<StateManager>();
+        _renderersController = GetComponentInChildren<FireRenderersController>();
     }
 
     private void DontVisibleAll()
@@ -148,6 +150,7 @@ public class Rotatedrone : MonoBehaviour
             nowAngle = GetNowAngle();
 
             GetAngle(nowAngle);
+            _renderersController.angle = angle;
 
             switch (angle)
             {

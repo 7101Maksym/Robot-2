@@ -3,7 +3,7 @@ public enum GunStates
     Gun_horizontal,
     Gun_vertical,
     Flamethrover_horizontal,
-    Flamethrower_vertical
+    Flamethrover_vertical,
 }
 
 public enum FlyingStates

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    public GunStates GunState = GunStates.Gun_horizontal;
+    public GunStates GunState = GunStates.Flamethrover_horizontal;
 
     public FlyingStates FlyingState = FlyingStates.Flying;
 

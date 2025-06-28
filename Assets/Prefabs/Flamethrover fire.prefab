@@ -572,6 +572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 863782996766385004}
+  - component: {fileID: 8185244278432643825}
   m_Layer: 0
   m_Name: Renderers
   m_TagString: Untagged
@@ -610,6 +611,34 @@ Transform:
   - {fileID: 5334249125633346780}
   m_Father: {fileID: 338333028853294903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8185244278432643825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4478079228722777896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e10ed78a84b87148aa63bc4ded05cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  R000: {fileID: 5945913287968176947}
+  R022: {fileID: 4709255722007442833}
+  R045: {fileID: 1310797836516496707}
+  R067: {fileID: 6288865725965876666}
+  R090: {fileID: 5986877064632384643}
+  R112: {fileID: 992476728009271217}
+  R135: {fileID: 8539771992092321067}
+  R157: {fileID: 6212335966555724785}
+  R180: {fileID: 6984708842168391941}
+  R202: {fileID: 3831343385633910324}
+  R225: {fileID: 4064517801874061822}
+  R247: {fileID: 8852735936788555400}
+  R270: {fileID: 2386952291218561230}
+  R292: {fileID: 3130721575885715442}
+  R315: {fileID: 5983140877145855106}
+  R337: {fileID: 2517059465724474013}
 --- !u!1 &4818947146844574583
 GameObject:
   m_ObjectHideFlags: 0
