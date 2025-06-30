@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RenderController : MonoBehaviour
+public class DroneRendererScript : MonoBehaviour
 {
     private StateManager _stateManager;
     private Animator _animator;
@@ -10,7 +10,26 @@ public class RenderController : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _stateManager = GetComponentInParent<StateManager>();
+        _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+    }
+
+    public void Shoot()
+    {
+        switch (_stateManager.GunState)
+        {
+            case GunStates.Flamethrover_horizontal:
+                _animator.Play("Flamethrover horizontal");
+                break;
+            case GunStates.Flamethrover_vertical:
+                _animator.Play("Flamethrover vertical");
+                break;
+            case GunStates.Gun_horizontal:
+                _animator.Play("Gun horizontal");
+                break;
+            case GunStates.Gun_vertical:
+                _animator.Play("Gun vertical");
+                break;
+        }
     }
 
     public void SetFlyDirection(int direction)

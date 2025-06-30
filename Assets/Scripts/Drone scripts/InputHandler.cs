@@ -4,10 +4,16 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private DroneMove _droneMove;
+    private FireRenderersController _fireRenderersController;
+    private DroneRenderersController _droneRenderersController;
+    private StateManager _stateManager;
 
     private void Awake()
     {
         _droneMove = GetComponent<DroneMove>();
+        _fireRenderersController = GetComponentInChildren<FireRenderersController>();
+        _droneRenderersController = GetComponentInChildren<DroneRenderersController>();
+        _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -24,6 +30,10 @@ public class InputHandler : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        
+        if (_stateManager.FlyingState == FlyingStates.Flying)
+        {
+            _fireRenderersController.Shoot();
+            _droneRenderersController.SetShootForAllRenderers();
+        }
     }
 }

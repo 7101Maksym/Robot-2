@@ -30,7 +30,7 @@ public class Rotatedrone : MonoBehaviour
 
     private void Awake()
     {
-        _stateManager = GetComponent<StateManager>();
+        _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
         _renderersController = GetComponentInChildren<FireRenderersController>();
     }
 

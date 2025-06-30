@@ -4,7 +4,7 @@ public class DroneMove : MonoBehaviour
 {
     private StateManager _stateManager;
     private Rigidbody2D _rb;
-    private RenderersHandler _renderersHandler;
+    private DroneRenderersController _renderersHandler;
 
     private Vector2 forvard, back, left, right;
     private Vector2 _direction;
@@ -13,8 +13,8 @@ public class DroneMove : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _stateManager = GetComponent<StateManager>();
-        _renderersHandler = GetComponentInChildren<RenderersHandler>();
+        _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
+        _renderersHandler = GetComponentInChildren<DroneRenderersController>();
     }
 
     private void Update()
