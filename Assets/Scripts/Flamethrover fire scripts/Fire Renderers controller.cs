@@ -54,7 +54,7 @@ public class FireRenderersController : MonoBehaviour
     {
         DontVisibleAll();
 
-        _stateManager.FlyingState = FlyingStates.Landed;
+        _stateManager.MovingState = MovingStates.NotMove;
 
         switch (angle)
         {
@@ -128,8 +128,8 @@ public class FireRenderersController : MonoBehaviour
                 break;
         }
     }
-
-    public void Shoot()
+    
+    public void PlayShoot()
     {
         SetRendererAndShoot();
     }

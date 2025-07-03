@@ -5,14 +5,14 @@ public class InputHandler : MonoBehaviour
 {
     private DroneMove _droneMove;
     private FireRenderersController _fireRenderersController;
-    private DroneRenderersController _droneRenderersController;
+    private DroneRendererController _droneRendererController;
     private StateManager _stateManager;
 
     private void Awake()
     {
         _droneMove = GetComponent<DroneMove>();
         _fireRenderersController = GetComponentInChildren<FireRenderersController>();
-        _droneRenderersController = GetComponentInChildren<DroneRenderersController>();
+        _droneRendererController = GetComponentInChildren<DroneRendererController>();
         _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
 
@@ -20,20 +20,28 @@ public class InputHandler : MonoBehaviour
     {
         var movement = context.ReadValue<Vector2>();
         _droneMove.SetDirection((int)movement.y, (int)movement.x);
+        _droneRendererController.Move(movement);
     }
 
     public void OnTakeoffOrLand(InputAction.CallbackContext context)
     {
         var takeoffOrLand = context.ReadValue<float>();
-        _droneMove.TakeoffOrLand((int)takeoffOrLand);
+
+        if (takeoffOrLand < 0f)
+        {
+            if (_stateManager.MovingState == MovingStates.Move)
+            {
+                _droneRendererController.Landing(false);
+            }
+        }
+        else if (takeoffOrLand > 0f)
+        {
+            _droneRendererController.Landing(true);
+        }
     }
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (_stateManager.FlyingState == FlyingStates.Flying)
-        {
-            _fireRenderersController.Shoot();
-            _droneRenderersController.SetShootForAllRenderers();
-        }
+
     }
 }

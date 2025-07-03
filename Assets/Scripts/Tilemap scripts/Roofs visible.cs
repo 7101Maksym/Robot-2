@@ -34,7 +34,7 @@ public class Roofsvisible : MonoBehaviour
     {
         if (_isPlayerOnRoof)
         {
-            if (_tilemap.color.a > 0.3f)
+            if (_tilemap.color.a > 0.2f)
             {
                 _tilemap.color = new Color(1f, 1f, 1f, _tilemap.color.a - 0.01f);
             }

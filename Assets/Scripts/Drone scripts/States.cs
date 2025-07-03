@@ -17,3 +17,9 @@ public enum ShootingStates
     Shooting,
     NotShooting
 }
+
+public enum MovingStates
+{
+    Move,
+    NotMove
+}

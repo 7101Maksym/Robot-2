@@ -4,7 +4,7 @@ public class DroneMove : MonoBehaviour
 {
     private StateManager _stateManager;
     private Rigidbody2D _rb;
-    private DroneRenderersController _renderersHandler;
+    private DroneRendererController _renderersHandler;
 
     private Vector2 forvard, back, left, right;
     private Vector2 _direction;
@@ -14,7 +14,7 @@ public class DroneMove : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
-        _renderersHandler = GetComponentInChildren<DroneRenderersController>();
+        _renderersHandler = GetComponentInChildren<DroneRendererController>();
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class DroneMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_stateManager.FlyingState == FlyingStates.Flying)
+        if (_stateManager.MovingState == MovingStates.Move)
         {
             SetDirectionInProcess();
             _rb.velocity = _direction * 5f;
@@ -44,31 +44,26 @@ public class DroneMove : MonoBehaviour
         if (WS == 0 && AD == 0)
         {
             _direction = Vector2.zero;
-            _renderersHandler.SetDirectForAllRenderers(0);
             return;
         }
         else if (WS == 0 && AD == 1)
         {
             _direction = right;
-            _renderersHandler.SetDirectForAllRenderers(2);
             return;
         }
         else if (WS == 0 && AD == -1)
         {
             _direction = left;
-            _renderersHandler.SetDirectForAllRenderers(4);
             return;
         }
         else if (WS == 1 && AD == 0)
         {
             _direction = forvard;
-            _renderersHandler.SetDirectForAllRenderers(1);
             return;
         }
         else if (WS == -1 && AD == 0)
         {
             _direction = back;
-            _renderersHandler.SetDirectForAllRenderers(3);
             return;
         }
     }
@@ -77,20 +72,5 @@ public class DroneMove : MonoBehaviour
     {
         this.WS = WS;
         this.AD = AD;
-    }
-
-    public void TakeoffOrLand(int LandOrTakeoff)
-    {
-        if (LandOrTakeoff != 0)
-        {
-            if (LandOrTakeoff == 1 && _stateManager.FlyingState == FlyingStates.Landed)
-            {
-                _renderersHandler.SetTakeoffOrLandForAllRenderers(FlyingStates.Flying);
-            }
-            else if (LandOrTakeoff == -1 && _stateManager.FlyingState == FlyingStates.Flying)
-            {
-                _renderersHandler.SetTakeoffOrLandForAllRenderers(FlyingStates.Landed);
-            }
-        }
     }
 }
