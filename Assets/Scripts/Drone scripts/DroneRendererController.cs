@@ -51,7 +51,33 @@ public class DroneRendererController : MonoBehaviour
 
     public void Shoot()
     {
+        if (_typeOfAction == 1f)
+        {
+            _animator.SetFloat("TypeOfAction(1-Moving)", 2f);
 
+            if (_stateManager.GunState == GunStates.Flamethrover_vertical)
+            {
+                _animator.SetFloat("GunType(1-Flamethrover)", 1f);
+                _animator.SetFloat("ShootingType(1-Horizontal)", 0f);
+            }
+            else if (_stateManager.GunState == GunStates.Flamethrover_horizontal)
+            {
+                _animator.SetFloat("GunType(1-Flamethrover)", 1f);
+                _animator.SetFloat("ShootingType(1-Horizontal)", 1f);
+            }
+            else if (_stateManager.GunState == GunStates.Gun_horizontal)
+            {
+                _animator.SetFloat("GunType(1-Flamethrover)", 0f);
+                _animator.SetFloat("ShootingType(1-Horizontal)", 1f);
+            }
+            else if (_stateManager.GunState == GunStates.Gun_vertical)
+            {
+                _animator.SetFloat("GunType(1-Flamethrover)", 0f);
+                _animator.SetFloat("ShootingType(1-Horizontal)", 0f);
+            }
+
+            Invoke(nameof(StopShooting), 3f);
+        }
     }
 
     public void Hit()
@@ -61,7 +87,6 @@ public class DroneRendererController : MonoBehaviour
 
     public void Landing(bool takeoff)
     {
-        _animator.playbackTime = 0f;
         if (takeoff)
         {
             if (_landing == 0f)
@@ -103,5 +128,10 @@ public class DroneRendererController : MonoBehaviour
         _landing = _animator.GetFloat("Landing(0-StayLanded)");
 
         //Debug.Log($"Gun Type: {_gunType}, Shooting Type: {_shootingType}, Type of Action: {_typeOfAction}, Landing: {_landing}");
+    }
+
+    private void StopShooting()
+    {
+        SetTypeOfAction(1);
     }
 }

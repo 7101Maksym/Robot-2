@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class oFireRenderersController : MonoBehaviour
+public class oFireRendererController : MonoBehaviour
 {
     private Animator _animator;
     private StateManager _stateManager;
@@ -30,6 +30,10 @@ public class oFireRenderersController : MonoBehaviour
                 _animator.SetFloat("HorizontalOrVertical", -1f);
                 StartCoroutine(StopShoot());
             }
+        }
+        else
+        {
+            _animator.SetFloat("HorizontalOrVertical", 0f);
         }
     }
 

@@ -50,7 +50,7 @@ public class FireRenderersController : MonoBehaviour
         R337.enabled = false;
     }
 
-    public void SetRendererAndShoot()
+    private void SetRendererAndShoot()
     {
         DontVisibleAll();
 
@@ -127,8 +127,16 @@ public class FireRenderersController : MonoBehaviour
                 R000.gameObject.GetComponent<FireRendererScript>().Shoot();
                 break;
         }
+
+        Invoke(nameof(SetMoving), 3f);
     }
-    
+
+    private void SetMoving()
+    {
+        _stateManager.MovingState = MovingStates.Move;
+        DontVisibleAll();
+    }
+
     public void PlayShoot()
     {
         SetRendererAndShoot();

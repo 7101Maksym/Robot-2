@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    public GunStates GunState = GunStates.Gun_vertical;
+    [SerializeField] private GunStates DefaultGunState;
+    [SerializeField] private MovingStates DefaultMovingState;
 
-    public MovingStates MovingState = MovingStates.Move;
+    public GunStates GunState { get; set; }
+
+    public MovingStates MovingState { get; set; }
+
+    private void Awake()
+    {
+        GunState = DefaultGunState;
+        MovingState = DefaultMovingState;
+    }
 }

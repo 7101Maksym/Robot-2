@@ -6,6 +6,7 @@ public class InputHandler : MonoBehaviour
     private DroneMove _droneMove;
     private FireRenderersController _fireRenderersController;
     private DroneRendererController _droneRendererController;
+    private oFireRendererController _fireRendererControllerModified;
     private StateManager _stateManager;
 
     private void Awake()
@@ -13,6 +14,7 @@ public class InputHandler : MonoBehaviour
         _droneMove = GetComponent<DroneMove>();
         _fireRenderersController = GetComponentInChildren<FireRenderersController>();
         _droneRendererController = GetComponentInChildren<DroneRendererController>();
+        _fireRendererControllerModified = GetComponentInChildren<oFireRendererController>();
         _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
 
@@ -42,6 +44,12 @@ public class InputHandler : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
+        if (_stateManager.MovingState == MovingStates.Move)
+        {
+            _fireRenderersController.PlayShoot();
+            _fireRendererControllerModified.Shoot();
+        }
 
+        _droneRendererController.Shoot();
     }
 }

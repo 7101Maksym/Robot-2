@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rotatedrone : MonoBehaviour
 {
     [SerializeField] private DroneRendererController _droneRendererController;
+    [SerializeField] private FireRenderersController _fireRenderersController;
 
     private StateManager _stateManager;
 
@@ -119,5 +120,7 @@ public class Rotatedrone : MonoBehaviour
         {
             _droneRendererController.Rotate(GetAngle());
         }
+
+        _fireRenderersController.angle = GetAngle();
     }
 }
