@@ -27,20 +27,23 @@ public class DroneRendererController : MonoBehaviour
 
     public void Move(Vector2 direction)
     {
-        if (direction.y != 0)
+        if (_stateManager.MovingState == MovingStates.Move)
         {
-            _animator.SetFloat("FlyForvardBack", direction.normalized.y);
-            _animator.SetFloat("FlyLeftRight", 0f);
-        }
-        else if (direction.x != 0)
-        {
-            _animator.SetFloat("FlyLeftRight", direction.normalized.x);
-            _animator.SetFloat("FlyForvardBack", 0f);
-        }
-        else
-        {
-            _animator.SetFloat("FlyLeftRight", 0f);
-            _animator.SetFloat("FlyForvardBack", 0f);
+            if (direction.y != 0)
+            {
+                _animator.SetFloat("FlyForvardBack", direction.normalized.y);
+                _animator.SetFloat("FlyLeftRight", 0f);
+            }
+            else if (direction.x != 0)
+            {
+                _animator.SetFloat("FlyLeftRight", direction.normalized.x);
+                _animator.SetFloat("FlyForvardBack", 0f);
+            }
+            else
+            {
+                _animator.SetFloat("FlyLeftRight", 0f);
+                _animator.SetFloat("FlyForvardBack", 0f);
+            }
         }
     }
 
@@ -53,7 +56,11 @@ public class DroneRendererController : MonoBehaviour
     {
         if (_typeOfAction == 1f)
         {
+            _animator.Play("", 0, 0f);
+
             _animator.SetFloat("TypeOfAction(1-Moving)", 2f);
+
+            _stateManager.MovingState = MovingStates.NotMove;
 
             if (_stateManager.GunState == GunStates.Flamethrover_vertical)
             {
@@ -76,7 +83,7 @@ public class DroneRendererController : MonoBehaviour
                 _animator.SetFloat("ShootingType(1-Horizontal)", 0f);
             }
 
-            Invoke(nameof(StopShooting), 3f);
+            Invoke(nameof(StopShooting), 2f);
         }
     }
 
@@ -126,12 +133,19 @@ public class DroneRendererController : MonoBehaviour
         _shootingType = _animator.GetFloat("ShootingType(1-Horizontal)");
         _typeOfAction = _animator.GetFloat("TypeOfAction(1-Moving)");
         _landing = _animator.GetFloat("Landing(0-StayLanded)");
-
-        //Debug.Log($"Gun Type: {_gunType}, Shooting Type: {_shootingType}, Type of Action: {_typeOfAction}, Landing: {_landing}");
     }
 
     private void StopShooting()
     {
         SetTypeOfAction(1);
+        _animator.SetFloat("FlyLeftRight", 0f);
+        _animator.SetFloat("FlyForvardBack", 0f);
+
+        Invoke(nameof(SetMovingState), 1f);
+    }
+
+    private void SetMovingState()
+    {
+        _stateManager.MovingState = MovingStates.Move;
     }
 }

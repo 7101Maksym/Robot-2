@@ -5,7 +5,7 @@ using UnityEngine;
 public class Rotatedrone : MonoBehaviour
 {
     [SerializeField] private DroneRendererController _droneRendererController;
-    [SerializeField] private FireRenderersController _fireRenderersController;
+    [SerializeField] private FireRendererController _fireRenderersController;
 
     private StateManager _stateManager;
 

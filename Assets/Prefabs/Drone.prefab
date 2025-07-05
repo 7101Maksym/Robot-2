@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _droneRendererController: {fileID: 2791406990166932856}
-  _fireRenderersController: {fileID: 3634304332540996350}
+  _fireRenderersController: {fileID: 7622139545103542272}
 --- !u!114 &8556344721546150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,9 +546,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 338333028853294903, guid: b9abac45a4ca1cb4e8c7852e0ec2d26b, type: 3}
   m_PrefabInstance: {fileID: 2846613289735406579}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3634304332540996350 stripped
+--- !u!114 &7622139545103542272 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1580366805377034509, guid: b9abac45a4ca1cb4e8c7852e0ec2d26b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5640323385277770739, guid: b9abac45a4ca1cb4e8c7852e0ec2d26b, type: 3}
   m_PrefabInstance: {fileID: 2846613289735406579}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

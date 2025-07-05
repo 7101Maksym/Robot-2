@@ -25,6 +25,8 @@ public class DroneMove : MonoBehaviour
         forvard = -back.normalized;
         left = Vector2.Perpendicular(forvard).normalized;
         right = -left;
+
+        _renderersHandler.Move(new Vector2(AD, WS));
     }
 
     private void FixedUpdate()

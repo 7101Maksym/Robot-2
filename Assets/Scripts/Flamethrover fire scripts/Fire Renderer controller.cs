@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class oFireRendererController : MonoBehaviour
+public class FireRendererController : MonoBehaviour
 {
     private Animator _animator;
     private StateManager _stateManager;
+
+    public float angle;
 
     private void Awake()
     {
@@ -15,6 +17,8 @@ public class oFireRendererController : MonoBehaviour
 
     public void Shoot()
     {
+        _animator.Play("", 0, 0f);
+
         if (_stateManager.GunState == GunStates.Flamethrover_vertical)
         {
             if (_animator.GetFloat("HorizontalOrVertical") == 0f)
@@ -42,5 +46,13 @@ public class oFireRendererController : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         _animator.SetFloat("HorizontalOrVertical", 0f);
+    }
+
+    private void Update()
+    {
+        if (_stateManager.MovingState == MovingStates.Move)
+        {
+            _animator.SetFloat("Angle", angle);
+        }
     }
 }

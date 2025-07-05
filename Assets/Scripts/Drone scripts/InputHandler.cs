@@ -4,17 +4,15 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private DroneMove _droneMove;
-    private FireRenderersController _fireRenderersController;
+    private FireRendererController _fireRendererController;
     private DroneRendererController _droneRendererController;
-    private oFireRendererController _fireRendererControllerModified;
     private StateManager _stateManager;
 
     private void Awake()
     {
         _droneMove = GetComponent<DroneMove>();
-        _fireRenderersController = GetComponentInChildren<FireRenderersController>();
+        _fireRendererController = GetComponentInChildren<FireRendererController>();
         _droneRendererController = GetComponentInChildren<DroneRendererController>();
-        _fireRendererControllerModified = GetComponentInChildren<oFireRendererController>();
         _stateManager = GameObject.Find("StateManager").GetComponent<StateManager>();
     }
 
@@ -22,7 +20,6 @@ public class InputHandler : MonoBehaviour
     {
         var movement = context.ReadValue<Vector2>();
         _droneMove.SetDirection((int)movement.y, (int)movement.x);
-        _droneRendererController.Move(movement);
     }
 
     public void OnTakeoffOrLand(InputAction.CallbackContext context)
@@ -46,11 +43,9 @@ public class InputHandler : MonoBehaviour
     {
         if (_stateManager.MovingState == MovingStates.Move)
         {
-            _fireRenderersController.PlayShoot();
-            _fireRendererControllerModified.Shoot();
+            _fireRendererController.Shoot();
+            _droneRendererController.Shoot();
         }
-
-        _droneRendererController.Shoot();
     }
 
     public void OnRun(InputAction.CallbackContext context)
