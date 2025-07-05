@@ -52,4 +52,16 @@ public class InputHandler : MonoBehaviour
 
         _droneRendererController.Shoot();
     }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _droneMove.Run();
+        }
+        else
+        {
+            _droneMove.NotRun();
+        }
+    }
 }

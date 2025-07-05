@@ -9,6 +9,7 @@ public class DroneMove : MonoBehaviour
     private Vector2 forvard, back, left, right;
     private Vector2 _direction;
     private int WS, AD;
+    private float _speed = 5f;
 
     private void Awake()
     {
@@ -31,7 +32,7 @@ public class DroneMove : MonoBehaviour
         if (_stateManager.MovingState == MovingStates.Move)
         {
             SetDirectionInProcess();
-            _rb.velocity = _direction * 5f;
+            _rb.velocity = _direction * _speed;
         }
         else
         {
@@ -72,5 +73,15 @@ public class DroneMove : MonoBehaviour
     {
         this.WS = WS;
         this.AD = AD;
+    }
+
+    public void Run()
+    {
+        _speed = 8f;
+    }
+
+    public void NotRun()
+    {
+        _speed = 5f;
     }
 }
